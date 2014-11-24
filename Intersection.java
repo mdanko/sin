@@ -21,7 +21,7 @@ public class Intersection
                                  .submitAndWait(new Callable<Object>() {
       public Object call() throws RuntimeException {
         try {
-          de.renew.net.Net net = de.renew.net.Net.forName("intersection_backup");
+          de.renew.net.Net net = de.renew.net.Net.forName("intersection");
           net.setEarlyTokens(true);
           initNet(net, true);
           System.out.print(net.places());

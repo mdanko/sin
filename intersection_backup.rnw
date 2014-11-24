@@ -974,7 +974,7 @@
         de.renew.gui.CPNTextFigure "attributes" "attributes" 5 "TextAlignment" "Int" 1 "MarkingAppearance" "Int" 1 "FigureWithID" "Int" 40600 "FrameColor" "Color" 255 199 158 255 "FillColor" "Color" 255 199 158 255 358 57 "4" "SansSerif" 0 12 0 REF 885 
             CH.ifa.draw.standard.OffsetLocator 0 0 
                 CH.ifa.draw.standard.RelativeLocator 0.5 0.5   1  
-        de.renew.gui.DeclarationFigure "attributes" "attributes" 5 "TextAlignment" "Int" 0 "MarkingAppearance" "Int" 1 "FigureWithID" "Int" 40601 "FrameColor" "Color" 255 199 158 255 "FillColor" "Color" 255 199 158 255 29 17 "import de.renew.util.Dist;\ncrossroads.Intersection net  = crossroads.Intersection();\n" "SansSerif" 0 12 0 NULL NULL 1  REF 56 
+        de.renew.gui.DeclarationFigure "attributes" "attributes" 5 "TextAlignment" "Int" 0 "MarkingAppearance" "Int" 1 "FigureWithID" "Int" 40601 "FrameColor" "Color" 255 199 158 255 "FillColor" "Color" 255 199 158 255 29 17 "import de.renew.util.Dist;" "SansSerif" 0 12 0 NULL NULL 1  REF 56 
         de.renew.gui.CPNTextFigure "attributes" "attributes" 5 "TextAlignment" "Int" 1 "MarkingAppearance" "Int" 1 "FigureWithID" "Int" 40603 "FrameColor" "Color" 255 199 158 255 "FillColor" "Color" 255 199 158 255 323 301 "[]" "SansSerif" 0 12 0 REF 56 
             CH.ifa.draw.standard.OffsetLocator 0 0 
                 CH.ifa.draw.standard.RelativeLocator 0.5 0.5   1  REF 15 REF 26 REF 42 REF 207 REF 350 

@@ -1,0 +1,3 @@
+package crossroads;
+
+class Intersection for net intersection {}
