@@ -1,7 +1,7 @@
 MANUAL
 
-*Prva verzia fuzzy java classy (CrossroadsFuzzyClass.java), ktora manipuluje s fuzzy controlerom (fuzzy.fcl).
-*Zatial neprijima so vstupnymi parametrami, hodnoty su napevno zvolene.
+*Druha verzia fuzzy java classy (CrossroadsFuzzyClass.java), ktora manipuluje s fuzzy kontrolerom (fuzzy.fcl).
+*Metoda getOutput prijima vstupne argumenty double AG, RGT a RQL a vracia double ST.
 
 Pracuje s hodnotami : 
 	-> RQL - pocet aut vo fronte na cervenu,
