@@ -12,21 +12,24 @@ VAR_OUTPUT
 END_VAR
 
 FUZZIFY RQL
-	TERM few := (0,1) (4,0);
+	TERM veryfew := (0,1) (1,1) (3,0);
+	TERM few := (1,0) (3,1) (5,0);
 	TERM moderate := (3,0) (5,1) (7,0);
-	TERM many := (6,0) (10,1);
+	TERM many := (5,0) (9,1) (9,1);
 END_FUZZIFY
 
 FUZZIFY RGT
-	TERM few := (0.0,1) (0.4,0);
+	TERM veryfew := (0.0,1) (0.1,1) (0.3,0);
+	TERM few := (0.1,0) (0.3,1) (0.5,0);
 	TERM moderate := (0.3,0) (0.5,1) (0.7,0);
-	TERM many := (0.6,0) (1.0,1);
+	TERM many := (0.5,0) (1.0,1) ;
 END_FUZZIFY
 
 FUZZIFY AG
-	TERM few := (0,1) (4,0);
+	TERM veryfew := (0,1) (1,1) (3,0);
+	TERM few := (1,0) (3,1) (5,0);
 	TERM moderate := (3,0) (5,1) (7,0);
-	TERM many := (6,0) (10,1);
+	TERM many := (5,0) (9,1) (9,1);
 END_FUZZIFY
 
 /*
@@ -38,9 +41,11 @@ END_FUZZIFY
 */
 
 DEFUZZIFY ST
-	TERM decrease := (-10,1) (-1,0);
+	TERM moredecrease := (-15,1) (-4,0);
+	TERM decrease := (-6,0) (-4,1) (-1,0);
 	TERM nochange := (-3,0) (0,1) (3,0);
-	TERM increase := (1,0) (10,1);
+	TERM increase := (1,0) (4,1) (6,0);
+	TERM moreincrease := (4,0) (15,1);
 	METHOD : COG;		// Use 'Center Of Gravity' defuzzification method
 	DEFAULT := 0;		// Default value is 0 (if no rule activates defuzzifier)
 END_DEFUZZIFY
@@ -50,9 +55,15 @@ RULEBLOCK No1
 	ACT : MIN;			// Use 'min' activation method
 	ACCU : MAX;			// Use 'max' accumulation method
 
-	RULE 1 : IF RQL IS many AND AG IS few AND RGT IS many THEN ST IS decrease;
-	RULE 2 : IF RQL IS moderate THEN ST IS nochange;
-	RULE 3 : IF RQL IS few AND AG IS many AND RGT IS few THEN ST IS increase;
+	RULE 1 : IF RQL IS many AND AG IS veryfew AND RGT IS many THEN ST IS moredecrease;
+	RULE 2 : IF RQL IS many AND AG IS few AND RGT IS many THEN ST IS moredecrease; 
+	RULE 3 : IF RQL IS many AND AG IS veryfew AND RGT IS moderate THEN ST IS decrease;
+	RULE 4 : IF RQL IS many AND AG IS few AND RGT IS moderate THEN ST IS decrease;	
+	RULE 5 : IF RQL IS moderate THEN ST IS nochange;
+	RULE 6 : IF RQL IS few AND AG IS many AND RGT IS few THEN ST IS increase;
+	RULE 7 : IF RQL IS veryfew AND AG IS moderate AND RGT IS veryfew THEN ST IS increase;
+	RULE 8 : IF RQL IS few AND AG IS many AND RGT IS veryfew THEN ST IS moreincrease;
+	RULE 9 : IF RQL IS veryfew AND AG IS many AND RGT IS veryfew THEN ST IS moreincrease;
 END_RULEBLOCK
 
 END_FUNCTION_BLOCK
