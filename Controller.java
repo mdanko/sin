@@ -21,6 +21,7 @@ public class Controller {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        this.fis = FIS.load(fileName,true);
 
     }
     public double getTime() {
@@ -44,7 +45,8 @@ public class Controller {
 
 
         // Return
-        return fis.getVariable("ST").getValue();
+        return 20.0;
+//        return fis.getVariable("ST").getValue();
     }
 
     public void newPhase(){
