@@ -54,7 +54,7 @@ public class CrossroadsFuzzyClass {
         fis.setVariable("RQL", RQL);	// arrival during green
         
         // Evaluate
-        fis.evaluate();   
+        fis.evaluate();
         
         // Return
         return fis.getVariable("ST").getValue();   
