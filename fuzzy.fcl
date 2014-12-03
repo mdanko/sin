@@ -1,39 +1,54 @@
 FUNCTION_BLOCK crossroads
 
 VAR_INPUT
-	RQL: REAL;		// red queue list
-	RGT: REAL;		// remaining green time
-	AG:   REAL;		// arrival during green
-	//AGDT:REAL;		// average green discharge time
+	red: REAL;		// red queue list
+	//RGT: REAL;		// remaining green time
+	green:   REAL;		// arrival during green
+	//greenDT:REAL;		// avergreene green discharge time
 END_VAR
 
 VAR_OUTPUT
 	ST:REAL; 		// signal timing
 END_VAR
 
-FUZZIFY RQL
+/*FUZZIFY red
 	TERM veryfew := (0,1) (1,1) (3,0);
 	TERM few := (1,0) (3,1) (5,0);
 	TERM moderate := (3,0) (5,1) (7,0);
 	TERM many := (5,0) (9,1) (9,1);
+END_FUZZIFY*/
+
+FUZZIFY red
+	TERM veryfew := (0,1) (3,1) (9,0);
+	TERM few := (3,0) (9,1) (15,0);
+	TERM moderate := (9,0) (15,1) (21,0);
+	TERM many := (15,0) (27,1) (27,1);
 END_FUZZIFY
 
-FUZZIFY RGT
+FUZZIFY green
+	TERM veryfew := (0,1) (1,1) (2,0);
+	TERM few := (1,0) (2,1) (3,0);
+	TERM moderate := (2,0) (3,1) (5,0);
+	TERM many := (4,0) (7,1) (7,1);
+END_FUZZIFY
+
+
+/*FUZZIFY RGT
 	TERM veryfew := (0.0,1) (0.1,1) (0.3,0);
 	TERM few := (0.1,0) (0.3,1) (0.5,0);
 	TERM moderate := (0.3,0) (0.5,1) (0.7,0);
 	TERM many := (0.5,0) (1.0,1) ;
-END_FUZZIFY
+END_FUZZIFY*/
 
-FUZZIFY AG
+/*FUZZIFY green
 	TERM veryfew := (0,1) (1,1) (3,0);
 	TERM few := (1,0) (3,1) (5,0);
 	TERM moderate := (3,0) (5,1) (7,0);
 	TERM many := (5,0) (9,1) (9,1);
-END_FUZZIFY
+END_FUZZIFY*/
 
 /*
-FUZZIFY AGDT
+FUZZIFY greenDT
 	TERM normal :=
 	TERM long :=
 	TERM very long :=
@@ -55,15 +70,15 @@ RULEBLOCK No1
 	ACT : MIN;			// Use 'min' activation method
 	ACCU : MAX;			// Use 'max' accumulation method
 
-	RULE 1 : IF RQL IS many AND AG IS veryfew AND RGT IS many THEN ST IS moredecrease;
-	RULE 2 : IF RQL IS many AND AG IS few AND RGT IS many THEN ST IS moredecrease; 
-	RULE 3 : IF RQL IS many AND AG IS veryfew AND RGT IS moderate THEN ST IS decrease;
-	RULE 4 : IF RQL IS many AND AG IS few AND RGT IS moderate THEN ST IS decrease;	
-	RULE 5 : IF RQL IS moderate THEN ST IS nochange;
-	RULE 6 : IF RQL IS few AND AG IS many AND RGT IS few THEN ST IS increase;
-	RULE 7 : IF RQL IS veryfew AND AG IS moderate AND RGT IS veryfew THEN ST IS increase;
-	RULE 8 : IF RQL IS few AND AG IS many AND RGT IS veryfew THEN ST IS moreincrease;
-	RULE 9 : IF RQL IS veryfew AND AG IS many AND RGT IS veryfew THEN ST IS moreincrease;
+	RULE 1 : IF red IS many AND green IS veryfew THEN ST IS moredecrease;
+	//RULE 2 : IF red IS many AND green IS few THEN ST IS moredecrease; 
+	//RULE 3 : IF red IS many AND green IS veryfew THEN ST IS decrease;
+	RULE 2 : IF red IS many AND green IS few THEN ST IS decrease;	
+	RULE 3 : IF red IS moderate THEN ST IS nochange;
+	//RULE 6 : IF red IS few AND green IS many THEN ST IS increase;
+	RULE 4 : IF red IS veryfew AND green IS moderate THEN ST IS increase;
+	RULE 5 : IF red IS few AND green IS many THEN ST IS moreincrease;
+	RULE 6 : IF red IS veryfew AND green IS many THEN ST IS moreincrease;
 END_RULEBLOCK
 
 END_FUNCTION_BLOCK

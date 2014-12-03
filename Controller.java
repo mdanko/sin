@@ -13,6 +13,8 @@ public class Controller {
     private String fileName;
     public Senzor s;
     private FIS fis;
+    private double time[];
+
     public Controller(Senzor s){
         System.out.print("======> New controller \n");
         this.s = s;
@@ -22,6 +24,12 @@ public class Controller {
             e.printStackTrace();
         }
         this.fis = FIS.load(fileName,true);
+
+        time = new double[4];
+        time[0] = 20;
+        time[1] = 20;
+        time[2] = 20;
+        time[3] = 20;
 
     }
     public double getTime() {
@@ -35,9 +43,9 @@ public class Controller {
         }
 
         // Set inputs
-        this.fis.setVariable("AG", s.getAG());     // red queue list
-        this.fis.setVariable("RGT", s.getRGT());	// remaining green time
-        this.fis.setVariable("RQL", s.getRQL());	// arrival during green
+        this.fis.setVariable("green", s.getAG());     // presli na zelenu
+//        this.fis.setVariable("RGT", s.getRGT());	// remaining green time
+        this.fis.setVariable("red", s.getRQL());	// pocet cakajucich
 
         // Evaluate
         this.fis.evaluate();
@@ -45,7 +53,11 @@ public class Controller {
 
 
         // Return
-        return 20.0;
+//        time[s.getPhase()] = time[s.getPhase()] + fis.getVariable("ST").getValue();
+        System.err.println("Cas pre fazu: " + s.getPhase() + " je " + time[s.getPhase()]);
+        s.clear();
+
+        return time[s.getPhase()];
 //        return fis.getVariable("ST").getValue();
     }
 
