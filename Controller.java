@@ -51,13 +51,14 @@ public class Controller {
         this.fis.evaluate();
 
 
-
+        time[s.getPhase()] = 20.0 + fis.getVariable("ST").getValue();
         // Return
 //        time[s.getPhase()] = time[s.getPhase()] + fis.getVariable("ST").getValue();
-        System.err.println("Cas pre fazu: " + s.getPhase() + " je " + time[s.getPhase()]);
+        System.err.println("Cas pre fazu: " + s.getPhase() + " je " + time[s.getPhase()] + " (" + fis.getVariable("ST").getValue() +  ") z green:" + s.getAG() + " a red:" + s.getRQL());
         s.clear();
 
         return time[s.getPhase()];
+        //return 20.0;
 //        return fis.getVariable("ST").getValue();
     }
 

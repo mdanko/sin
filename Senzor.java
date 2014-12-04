@@ -57,17 +57,21 @@ public class Senzor {
     }
 
     public double getAG() {
-        if(phase == 0) return Wgo;
-        if(phase == 1) return Sgo;
-        if(phase == 2) return Ego;
-        return Ngo;
+        if(phase == 0) return Wgo;	// auta, ktore presli cez zelenu na West
+        if(phase == 1) return Sgo;	// auta, ktore presli cez zelenu na South
+        if(phase == 2) return Ego;	// auta, ktore presli cez zelenu na East
+        return Ngo;					// auta, ktore presli cez zelenu na North
     }
 
     public double getRQL() {
-        if(phase == 0) return W;
-        if(phase == 1) return S;
-        if(phase == 2) return E;
-        return N;
+        //if(phase == 0) return W;        
+    	//if(phase == 1) return S;
+        //if(phase == 2) return E;
+        //return N;
+        if(phase == 0) return S+E+N; // auta, ktore cakali, ked bola zelena na West    
+    	if(phase == 1) return W+E+N; // auta, ktore cakali, ked bola zelena na South 
+        if(phase == 2) return W+S+N; // auta, ktore cakali, ked bola zelena na East 
+        return W+S+E;				 // auta, ktore cakali, ked bola zelena na North 
     }
 
     public void newPhase() {
@@ -93,10 +97,10 @@ public class Senzor {
     }
 
     public void clear() {
-        if(phase == 0) Wgo = 0;
-        if(phase == 1) Sgo = 0;
-        if(phase == 2) Ego = 0;
-        if(phase == 3) Ngo = 0;
+        if(phase == 0) { System.err.println("W preslo  " + Wgo); System.err.println("a stalo  " + (W+S+E+N)); Wgo = 0; }
+        if(phase == 1) { System.err.println("S preslo  " + Sgo); System.err.println("a stalo  " + (W+S+E+N)); Sgo = 0; }
+        if(phase == 2) { System.err.println("E preslo  " + Ego); System.err.println("a stalo  " + (W+S+E+N)); Ego = 0; }
+        if(phase == 3) { System.err.println("N preslo  " + Ngo); System.err.println("a stalo  " + (W+S+E+N)); Ngo = 0; }
     }
 
     public int getPhase() {
